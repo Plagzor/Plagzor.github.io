@@ -3,6 +3,7 @@
   <head>
     <title>DnD World Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset='utf-8'>
     <link rel="stylesheet" href="scripts/leaflet.css">
     <script src="scripts/leaflet.js"></script>
   </head>
@@ -19,33 +20,49 @@
       maxZoom: 5,
     }).addTo(map);
   //Coordinate Finder
-    var marker = L.marker([0, 0], {
+    var marker = L.marker([74.402163, 2.635573], {
       draggable: true,
     }).addTo(map);
     marker.bindPopup('LatLng Marker').openPopup();
     marker.on('dragend', function(e) {
       marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
     });
+  //Icons
+    var lairIcon = L.icon({
+      iconUrl: 'icons/lair-icon.png',
+      iconRetinaUrl: 'icons/lair-icon-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    });
+    var ruinsIcon = L.icon({
+      iconUrl: 'icons/ruins-icon',
+      iconRetinaUrl: 'icons/ruins-icon-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    });
+  
   //Markers
-    var el_city_pristav_nyanzar = L.marker([54.290898, 11.206055]).bindPopup('<b>Pristav Nyanzar</b>');
-    var el_ruins_uptao_chram = L.marker([51.104484, 16.523438]).bindPopup('<b>Ruiny chramu boha Uptao</b>');
-    var el_lair_ohniprst = L.marker([35.108379, 13.886719]).bindPopup('<b>Strazna vez Ohniprst</b>');
-    var el_kir_sabal = L.marker([12.985826, 24.697266]).bindPopup('<b>Utes Kir Sabal (Arakokra)</b>');
-    var el_ruins_mezro = L.marker([12.985826, 24.697266]).bindPopup('<b>Ruiny Mesta Mezro</b>');
+    var el_city_pristav_nyanzar = L.marker([54.290898, 11.206055]).bindPopup('<b>Přistav Nyanzar</b>');
+    var el_ruins_uptao_chram = L.marker([51.104484, 16.523438],{icon: ruinsIcon}).bindPopup('<b>Ruiny chrámu [Uptao]</b>');
+    var el_lair_ohniprst = L.marker([35.108379, 13.886719],{icon: lairIcon}).bindPopup('<b>Strážná věž Ohniprst</b>');
+    var el_kir_sabal = L.marker([12.985826, 24.697266]).bindPopup('<b>Útes Kir Sabal (Arakokra)</b>');
+    var el_ruins_mezro = L.marker([36.066862, 25.795423],{icon: ruinsIcon}).bindPopup('<b>Ruiny Města Mezro</b>');
   //Marker Groups
     var mg_towns = L.layerGroup([el_city_pristav_nyanzar]);
     var mg_camps = L.layerGroup([el_kir_sabal]);
     var mg_lairs = L.layerGroup([el_lair_ohniprst]);
-    var mg_ruins = L.layerGroup([el_ruins_uptao_chram,el_ruins_mezro]);
+    var mg_ruins = L.layerGroup([el_ruins_uptao_chram,el_ruins_mezro],{icon: ruinsIcon});
   //Marker Overlay
     var overlays={
-      "Mesta" : mg_towns,
+      "Města" : mg_towns,
       "Ruiny" : mg_ruins,
       "Kempy" : mg_camps,
       "Monstra" : mg_lairs
       }
   //GROUP CONTROLS
-    L.control.layers(null, overlays).addTo(map);
+    L.control.layers(null, overlays, {collapsed: false}).addTo(map);
     </script>
   </body>
 </html>
