@@ -19,47 +19,158 @@
       minZoom: 0,
       maxZoom: 5,
     }).addTo(map);
-  //Coordinate Finder
-    var marker = L.marker([74.402163, 2.635573], {
-      draggable: true,
-    }).addTo(map);
-    marker.bindPopup('LatLng Marker').openPopup();
-    marker.on('dragend', function(e) {
-      marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
-    });
+
   //Icons
-    var lairIcon = L.icon({
-      iconUrl: 'icons/lair-icon.png',
-      iconRetinaUrl: 'icons/lair-icon-2x.png',
+    var mestoIcon = L.icon({
+      iconUrl: 'icons/mesto.png',
+      //iconRetinaUrl: 'icons/mesto-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+      popupAnchor: [0, -30]
+    }); 
+    var pevnostIcon = L.icon({
+      iconUrl: 'icons/pevnost.png',
+      //iconRetinaUrl: 'icons/pevnost-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    }); 
+    var sidloIcon = L.icon({
+      iconUrl: 'icons/sidlo.png',
+      //iconRetinaUrl: 'icons/sidlo-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    }); 
+    var rujnyIcon = L.icon({
+      iconUrl: 'icons/rujny.png',
+      //iconRetinaUrl: 'icons/rujny-2x.png',
       iconSize: [40, 40],
       iconAnchor: [20, 30],
       popupAnchor: [0, -30]
     });
-    var ruinsIcon = L.icon({
-      iconUrl: 'icons/ruins-icon',
-      iconRetinaUrl: 'icons/ruins-icon-2x.png',
+    var zajimaveIcon = L.icon({
+      iconUrl: 'icons/zajimave.png',
+      //iconRetinaUrl: 'icons/zajimave-2x.png',
       iconSize: [40, 40],
       iconAnchor: [20, 30],
       popupAnchor: [0, -30]
     });
-  
+    var nemrtviIcon = L.icon({
+      iconUrl: 'icons/nemrtvi.png',
+      //iconRetinaUrl: 'icons/nemrtvi-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    });
+    var nepratelskeIcon = L.icon({
+      iconUrl: 'icons/nepratelske.png',
+      //iconRetinaUrl: 'icons/nepratelske-2x.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 30],
+      popupAnchor: [0, -30]
+    });
+
+    // var selectorIcon = L.icon({
+    //   iconUrl: 'icons/selector-icon.png',
+    //   iconRetinaUrl: 'icons/selector-icon.png',
+    //   iconSize: [40, 40],
+    //   iconAnchor: [20, 20],
+    //   popupAnchor: [0, -30]
+    // });
+  //Coordinate Finder
+      var marker = L.marker([74.402163, 2.635573],{draggable: true,},).addTo(map);
+      marker.bindPopup('LatLng Marker').openPopup();
+      marker.on('dragend', function(e) {
+        marker.getPopup().setContent(marker.getLatLng().toString()).openOn(map);
+      });
+  /*  
+  //Markers list prototype  
+    const markers_import = [
+        "el_pristav_nyanzar;54.290898, 11.206055;mestoIcon;Přístav Nyanzar",
+        "el_chram_boha_uptao;51.104484, 16.523438;rujnyIcon;Chrám boha Uptao",
+        "el_ohniprst;35.108379, 13.886719;nepratelskeIcon;Ohniprst",
+        "el_kir_sabal;12.985826, 24.697266;sidloIcon;Kir Sabal",
+        "el_mesto_mezro;36.066862, 25.795423;rujnyIcon;Město Mezro",
+        "el_tabor_spravedlivych;37.439915, -5.800781;zajimaveIcon;Tábor Spravedlivých",
+        "el_tabor_odplaty;31.652062, -14.853516;pevnostIcon;Tábor Odplaty",
+        "el_ataz_kahakla;8.664124, -32.167969;zajimaveIcon;Atáz Kahakla",
+        "el_ataz_muhahah;30.906515, 24.960938;zajimaveIcon;Atáz Muhahah",
+        "el_kastigliaruv_pristav;41.580186, 31.201172;rujnyIcon;Kastigliarův přístav",
+        "el_fort_belurian;62.192995, 21.445313;pevnostIcon;Fort Belurian",
+        "el_mblala;26.075319, -23.422852;rujnyIcon;Mblala",
+        "el_isau;-0.96878, 41.572266;rujnyIcon;Išau",
+        "el_silku;-43.65273, -44.033203;rujnyIcon;Šilku",
+        "el_ataz_yklwazi;-20.309214, -36.298828;zajimaveIcon;Atáz Yklwazi"
+    ];
+  //Loop to create marker variables from a list
+    
+    let mLenght = markers_import.length;
+    var looper = [];
+    var markerArray = [];
+    for (i=0; i<=n; i++){
+      looper = markers_import[i].split(";");
+      markerArray[i] = L.marker([looper[1]],{looper[2]}).bindPopup('<b>'+looper[3]+'</b>');
+    };
+      
+    */
   //Markers
-    var el_city_pristav_nyanzar = L.marker([54.290898, 11.206055]).bindPopup('<b>Přistav Nyanzar</b>');
-    var el_ruins_uptao_chram = L.marker([51.104484, 16.523438],{icon: ruinsIcon}).bindPopup('<b>Ruiny chrámu [Uptao]</b>');
-    var el_lair_ohniprst = L.marker([35.108379, 13.886719],{icon: lairIcon}).bindPopup('<b>Strážná věž Ohniprst</b>');
-    var el_kir_sabal = L.marker([12.985826, 24.697266]).bindPopup('<b>Útes Kir Sabal (Arakokra)</b>');
-    var el_ruins_mezro = L.marker([36.066862, 25.795423],{icon: ruinsIcon}).bindPopup('<b>Ruiny Města Mezro</b>');
+    var el_mesto_pristav_nyanzar = L.marker([54.290898, 11.206055],{icon: mestoIcon}).bindPopup('<b>Přístav Nyanzar</b>');
+    var el_nepratelske_ohniprst = L.marker([35.108379, 13.886719],{icon: nepratelskeIcon}).bindPopup('<b>Ohniprst</b>');
+    var el_pevnost_tabor_odplaty = L.marker([31.652062, -14.853516],{icon: pevnostIcon}).bindPopup('<b>Tábor Odplaty</b>');
+    var el_pevnost_fort_belurian = L.marker([62.192995, 21.445313],{icon: pevnostIcon}).bindPopup('<b>Fort Belurian</b>');
+    var el_rujny_chram_boha_uptao = L.marker([51.104484, 16.523438],{icon: rujnyIcon}).bindPopup('<b>Chrám boha Uptao</b>');
+    var el_rujny_mesto_mezro = L.marker([36.066862, 25.795423],{icon: rujnyIcon}).bindPopup('<b>Město Mezro</b>');
+    var el_rujny_kastigliaruv_pristav = L.marker([41.580186, 31.201172],{icon: rujnyIcon}).bindPopup('<b>Kastigliarův přístav</b>');
+    var el_rujny_mblala = L.marker([26.075319, -23.422852],{icon: rujnyIcon}).bindPopup('<b>Mblala</b>');
+    var el_rujny_isau = L.marker([-0.96878, 41.572266],{icon: rujnyIcon}).bindPopup('<b>Išau</b>');
+    var el_rujny_silku = L.marker([-43.65273, -44.033203],{icon: rujnyIcon}).bindPopup('<b>Šilku</b>');
+    var el_sidlo_kir_sabal = L.marker([12.985826, 24.697266],{icon: sidloIcon}).bindPopup('<b>Kir Sabal</b>');
+    var el_zajimave_tabor_spravedlivych = L.marker([37.439915, -5.800781],{icon: zajimaveIcon}).bindPopup('<b>Tábor Spravedlivých</b>');
+    var el_zajimave_ataz_kahakla = L.marker([8.664124, -32.167969],{icon: zajimaveIcon}).bindPopup('<b>Atáz Kahakla</b>');
+    var el_zajimave_ataz_muhahah = L.marker([30.906515, 24.960938],{icon: zajimaveIcon}).bindPopup('<b>Atáz Muhahah</b>');
+    var el_zajimave_ataz_yklwazi = L.marker([-20.309214, -36.298828],{icon: zajimaveIcon}).bindPopup('<b>Atáz Yklwazi</b>');
   //Marker Groups
-    var mg_towns = L.layerGroup([el_city_pristav_nyanzar]);
-    var mg_camps = L.layerGroup([el_kir_sabal]);
-    var mg_lairs = L.layerGroup([el_lair_ohniprst]);
-    var mg_ruins = L.layerGroup([el_ruins_uptao_chram,el_ruins_mezro],{icon: ruinsIcon});
+    var mg_towns = L.layerGroup([
+    el_mesto_pristav_nyanzar
+    ]);
+    var mg_lairs = L.layerGroup([
+    el_nepratelske_ohniprst
+    ]);
+    var mg_forts = L.layerGroup([
+    el_pevnost_tabor_odplaty,
+    el_pevnost_fort_belurian
+    ]);
+
+    var mg_ruins = L.layerGroup([
+    el_rujny_chram_boha_uptao,
+    el_rujny_mesto_mezro,
+    el_rujny_kastigliaruv_pristav,
+    el_rujny_mblala,
+    el_rujny_isau,
+    el_rujny_silku
+    ]);
+
+    var mg_camps = L.layerGroup([
+    el_sidlo_kir_sabal
+    ]);
+    
+    var mg_inter = L.layerGroup([
+    el_zajimave_tabor_spravedlivych,
+    el_zajimave_ataz_kahakla,
+    el_zajimave_ataz_muhahah,
+    el_zajimave_ataz_yklwazi  
+    ]);
+    var mg_undead = L.layerGroup([]);
   //Marker Overlay
     var overlays={
       "Města" : mg_towns,
-      "Ruiny" : mg_ruins,
       "Kempy" : mg_camps,
-      "Monstra" : mg_lairs
+      "Nepřátelské" : mg_lairs,
+      "Ruiny" : mg_ruins,
+      "Pevnosti" : mg_forts,
+      "Zajímavé" : mg_inter,
+      "Nemrtví" : mg_undead
       }
   //GROUP CONTROLS
     L.control.layers(null, overlays, {collapsed: false}).addTo(map);
